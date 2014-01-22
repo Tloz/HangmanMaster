@@ -32,15 +32,7 @@ Or at least, I haven't found it yet ;)
 
 Dictionary (very small, for example puposes)
 
->PLACE
-
->PLAZA
-
->PIZZA
-
->TRACE
-
->GLACE
+>PLACE PLAZA PIZZA TRACE GLACE
 
 ###Improvements
 
