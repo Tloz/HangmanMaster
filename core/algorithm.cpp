@@ -1,14 +1,23 @@
 #include "algorithm.h"
+#include "error.h"
 
 
 QVector<QString> openDict(int length, lang l)
 {
     QString dictName(QString::number(length) + ".");
 
-    if (l == EN)
+    switch (l)
+    {
+    case EN:
         dictName.append("en");
-    else
+        break;
+    case FR:
         dictName.append("fr");
+    default:
+        dictName.append("fr");
+        break;
+    }
+
     QFile dictionary(dictName);
     if(!dictionary.open(QIODevice::ReadOnly))
     {
