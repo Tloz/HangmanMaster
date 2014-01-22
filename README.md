@@ -44,7 +44,11 @@ A simple QString.
 Starts as a QString, then becomes a QVector of QString after parsing.
 
 ###Dictionary
-As of today, a QVector of QString.
+As of today, a QVector of QString. There is one dictionary for each length of word. They are named like this "length"."lang". So for example, the file that contains the french words of five letters is named 5.fr
+
+##Roadmap
+1. Create dictionaries
+2. Minimalist GUI 
 
 ##Improvements
 * Manage dictionary with a tree, and check wether it's faster or not (also I doubt it)
@@ -52,3 +56,5 @@ As of today, a QVector of QString.
 * The part that checks if there is no unwanted double works only on a word. Make it work on the whole sentence
 * Sentence analysis: instead of finding words that matches the input, try to obfuscate a whole phrase, and check if it is relevant: number of words, of letter, punctuation, ...
 * When the GUI will be functional to solve the hangman, add a function to add words in a dictionary. As of today, because of how the algorithm works, we dont need to sort the dictionary, or store it an tree instead of a vector
+
+##Known Bugs
