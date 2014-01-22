@@ -84,11 +84,27 @@ QVector<QString> *doubleSort(const QString word, QVector<QString> *words)
     QString iEmeMot;
     QChar jEmeLettre; //du mot à trouver
     QChar kEmeLettre; //du mot à comparer (ième mot)
-    QVector<QString> *words2 = new QVector<QString>(*words);
-    for(int i = 0; i < words2->size(); i++)
+    //QVector<QString> *words2 = new QVector<QString>(*words);
+    for(int i = 0; i < word.size(); i++)
     {
-
+        qDebug() << word[i];
+        if(word.at(i) != QChar('_'))
+            for(int j = 0; j < words->size(); j++)
+            {
+                QString subString1(words->at(j).left(i));
+                QString subString2(words->at(j).right(words->at(j).size() - i - 1));
+                qDebug() << "Working on" << words->at(j);
+                qDebug() << "---> substring1:" << subString1;
+                qDebug() << "---> substring2:" << subString2;
+                if((subString1.contains(word[i])) || subString2.contains(word[i]))
+                {
+                    qDebug() << "Doublet de" << word[i] << "non autorisé trouvé, suppression de" << words->at(j);
+                    words->remove(j);
+                    j--;
+                }
+            }
     }
+    return words;
 }
 
 // Final Call
