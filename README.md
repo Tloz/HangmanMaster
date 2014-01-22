@@ -45,6 +45,7 @@ Starts as a QString, then becomes a QVector of QString after parsing.
 
 ###Dictionary
 As of today, a QVector of QString. There is one dictionary for each length of word. They are named like this "length"."lang". So for example, the file that contains the french words of five letters is named 5.fr
+As the longest word in french is 25 letters long, there will be 25 files X.fr
 
 ##Roadmap
 1. Create dictionaries
@@ -58,3 +59,4 @@ As of today, a QVector of QString. There is one dictionary for each length of wo
 * When the GUI will be functional to solve the hangman, add a function to add words in a dictionary. As of today, because of how the algorithm works, we dont need to sort the dictionary, or store it an tree instead of a vector
 
 ##Known Bugs
+No one for the moment
