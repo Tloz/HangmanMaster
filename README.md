@@ -41,13 +41,12 @@ Hangman master uses Qt 5.0.2. Visit [Qt website](http://qt-project.org/) to lear
 A simple QString.
 
 ###Original Phrase
-Starts as a QString, then becomes a QVector<QString> after parsing.
+Starts as a QString, then becomes a QVector of QString after parsing.
 
 ###Dictionary
-As of today, a QVector<QString>.
+As of today, a QVector of QString.
 
 ##Improvements
-
 * Manage dictionary with a tree, and check wether it's faster or not (also I doubt it)
 * For the moment, the algorithm does 2 passes on each word to find. Hack to make it 1
 * The part that checks if there is no unwanted double works only on a word. Make it work on the whole sentence
