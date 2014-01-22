@@ -6,7 +6,7 @@ void test()
     const QString mysteryWord("__A_E");
     QVector<QString> dictionary (openDict(mysteryWord.size(), FR));
     QVector<QChar> *miss = new QVector<QChar>();
-    miss->append('T');
+    miss->append('G');
     miss->append('X');
     miss->append('I');
     qDebug() << mysteryWord << endl << dictionary << endl << *miss << endl;
