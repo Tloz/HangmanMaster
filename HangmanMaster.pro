@@ -1,6 +1,8 @@
 SOURCES += \
     core/algorithm.cpp \
-    main.cpp
+    main.cpp \
+    test.cpp
 
 HEADERS += \
-    core/algorithm.h
+    core/algorithm.h \
+    test.h
