@@ -18,17 +18,7 @@ And for each words, the algorithm gives the possibles words that matches the inp
 Originally, to identify matching words for one word to find, I had to do three things:
 
 1. Take all words in the dictionary with the same length than the word to find that have matching letters.
-For example, if you have _ _ A _ _, and this dictionary (very small, for example puposes):
->PLACE
-
->PLAZA
-
->PIZZA
-
->TRACE
-
->GLACE
-
+For example, if you have _ _ A _ _, and this dictionary below
 You take every words except PIZZA, as the third letter must be a A.
 
 2. Remove all words that contains letter that you know they aren't in the phrase.
@@ -39,6 +29,18 @@ In PLAZA, there are two A, nevertheless, in your word to find, there is only one
 
 There is no other way to remove words and being sure that they are not the one that we're looking for.
 Or at least, I haven't found it yet ;)
+
+Dictionary (very small, for example puposes)
+
+>PLACE
+
+>PLAZA
+
+>PIZZA
+
+>TRACE
+
+>GLACE
 
 ###Improvements
 
