@@ -23,6 +23,7 @@ For example, if you have _ _ A _ _, and this dictionary:
 >PIZZA
 >TRACE
 >GLACE
+
 You take every words except PIZZA, as the third letter must be a A.
 2. Remove all words that contains letter that you know they aren't in the phrase.
 Let's say that you know there are no G and T, you can get rid of TRACE and GLACE.
