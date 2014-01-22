@@ -33,23 +33,7 @@ QVector<QString> *positionSort(const QString word, int dico)
             knownLetterPosition.append(i);
 
     // open dictionary
-    QString dictName(QString::number(word.size()) + ".");
-
-    if (dico == 1)
-        dictName.append("en");
-    else
-        dictName.append("fr");
-    QFile dictionary(dictName);
-    if(!dictionary.open(QIODevice::ReadOnly))
-    {
-        //TODO:throw error
-    }
-
-    QTextStream ts(&dictionary);
-    QVector<QString> realDict;
-    while(!ts.atEnd())
-        realDict.append(ts.readLine());
-    dictionary.close();
+    QVector<QString> realDict = openDict(word.size(), FR);
 
     // take words with matching letters
     QVector<QString> *matchingWords = new QVector<QString>();
@@ -72,61 +56,20 @@ QVector<QString> *positionSort(const QString word, int dico)
 // Second part: missing sort
 QVector<QString> *missingSort(QVector<QString> *words, QVector<QChar>* forbidenLetters)
 {
-    QVector<QString> *returnValue = new QVector<QString>(*words);
-    for(int j = 0; j < words->size() -1; j++)
-        // for each letter in a word
-        for(int k = 0; k < words->at(j).size(); k++)
-            // for each forbidden letter
-            for(int i = 0; i < forbidenLetters->size(); i++)
-                if(forbidenLetters->value(i) == words->value(j).at(k))
-                {
-                    returnValue->remove(j);
-                    j++;
-                    k = -1;
-                }
-    delete words;
-    return returnValue;
+
 }
 
 // Third part: double sort
 QVector<QString> *doubleSort(const QString word, QVector<QString> *words)
 {
-    QVector<QPair<QChar, int> > *map = new QVector<QPair<QChar, int> >();
-    for(int i = 0; i < word.size(); i++)
-        if(word[i] != QChar('_'))
-            map->append(QPair(word[i], i));
-    /*
     QString iEmeMot;
     QChar jEmeLettre; //du mot à trouver
     QChar kEmeLettre; //du mot à comparer (ième mot)
-    QVector<QString> *returnValue = new QVector<QString>(*words);
-    for(int i = 0; i < words->size(); i++)
+    QVector<QString> *words2 = new QVector<QString>(*words);
+    for(int i = 0; i < words2->size(); i++)
     {
-        qDebug() << "";
-        iEmeMot = returnValue->at(i);
-        qDebug() << "i=" << i << "   " << iEmeMot;
-        for(int j = 0; j < returnValue[i].size(); j++)
-        {
-            jEmeLettre = word[j];
-            qDebug() << "j=" << j << "   " << jEmeLettre;
-            if(jEmeLettre != QChar('_'))
-            {
-                for(int k = j + 1; k < returnValue[i].size(); k++)
-                {
-                    kEmeLettre = word[k];
-                    qDebug() << "k=" << k << "   " << kEmeLettre << "VS" << returnValue->at(i)[j];
-                    if(kEmeLettre == returnValue->at(i).at(j))
-                    {
-                        qDebug() << words[i] << "retiré";
-                        words->remove(i);
-                    }
-                }
-            }
-        }
+
     }
-    delete returnValue;
-    return words;
-    */
 }
 
 // Final Call
