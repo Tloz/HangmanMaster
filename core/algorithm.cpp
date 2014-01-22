@@ -2,7 +2,7 @@
 #include "error.h"
 
 
-QVector<QString> openDict(int length, lang l) // Finished
+QVector<QString> openDict(int length, lang l) // Working. TODO: throw error
 {
     QString dictName(QString::number(length) + ".");
     switch (l)
@@ -32,130 +32,77 @@ QVector<QString> openDict(int length, lang l) // Finished
     return realDict;
 }
 
-// First part: position sort
-QVector<QString> *positionSort(const QString word, QVector<QString> realDict) // Finished
+bool hasBannedLetter(const QString word, QVector<QChar>* ban)
 {
+    foreach(QChar c, *ban)
+        if(word.contains(c))
+            return true;
+}
+
+QVector<QString> *solveWord(const QString word, QVector<QString> realDict, QVector<QChar>* bannedLetters)
+{
+    // Step 1
     // stores positions where you have a letter
+    QString subString1;
+    QString subString2;
+    QVector<QString> *words = new QVector<QString>();
     QVector<int> knownLetterPosition;
     for(int i = 0; i < word.size(); i++)
         if(word.at(i) != '_')
             knownLetterPosition.append(i);
 
-    // take words with matching letters
-    QVector<QString> *matchingWords = new QVector<QString>();
-    foreach(QString w, realDict)
+    // take words with matching letters and no unspecified copy of the letter
+    // as long as they don't contains a forbidden letter
+
+    foreach(QString dicoWord, realDict)
     {
-        int totalMatch = 0;
-        for(int i =0; i < knownLetterPosition.size(); i++)
+        //qDebug() << "Looking at" << dicoWord;
+        if(hasBannedLetter(dicoWord, bannedLetters))
         {
-            if(w[knownLetterPosition[i]] == word[knownLetterPosition[i]])
+            //qDebug() << dicoWord << "has a forbidden letter, thus, moving to the next word" << endl;
+            continue;
+        }
+        int totalMatch = 0;
+        for(int i = 0; i < knownLetterPosition.size(); i++)
+        {
+            int p = knownLetterPosition[i];
+            if(dicoWord[p] == word[p])
                 totalMatch += 1;
             else
                 i += knownLetterPosition.size();
         }
-        if(totalMatch == knownLetterPosition.size())
-            matchingWords->append(w);
-    }
-    return matchingWords;
-}
-
-// Second part: missing sort
-QVector<QString> *missingSort(QVector<QString> *words, QVector<QChar>* bannedLetters) // Finished
-{
-    for(int i = 0; i < words->size(); i++)
-    {
-        qDebug() << "working on" << words->at(i);
-        for(int j = 0; j < bannedLetters->size(); j++)
+        if((totalMatch == knownLetterPosition.size()))
         {
-            if(words->at(i).contains(bannedLetters->at(j)))
-            {
-                qDebug() << words->at(i) << "contains" << bannedLetters->at(j) << ": removing form list";
-                words->remove(i);
-                i--;
-            }
+            //qDebug() << dicoWord << "fits, adding it" << endl;
+            words->append(dicoWord);
         }
+        else
+        {
+            //qDebug() << dicoWord << "doesn't match" << endl;
+        }
+        // Looking for a way to do step 3 in a single pass instead of a second one
+        /*
+          subString1 = w.left(i + 1);
+          subString2 = w.right(w.size() - i);
+          qDebug() << subString1 << subString2;
+          && (!((subString1.contains(p)) || subString2.contains(p)))
+        */
     }
-    return words;
-}
 
-// Third part: double sort
-QVector<QString> *doubleSort(const QString word, QVector<QString> *words)
-{
-    QString iEmeMot;
-    QChar jEmeLettre; //du mot à trouver
-    QChar kEmeLettre; //du mot à comparer (ième mot)
-    //QVector<QString> *words2 = new QVector<QString>(*words);
+    /*
+    // Step 3
     for(int i = 0; i < word.size(); i++)
-    {
-        qDebug() << word[i];
         if(word.at(i) != QChar('_'))
             for(int j = 0; j < words->size(); j++)
             {
                 QString subString1(words->at(j).left(i));
                 QString subString2(words->at(j).right(words->at(j).size() - i - 1));
-                qDebug() << "Working on" << words->at(j);
-                qDebug() << "---> substring1:" << subString1;
-                qDebug() << "---> substring2:" << subString2;
                 if((subString1.contains(word[i])) || subString2.contains(word[i]))
                 {
-                    qDebug() << "Doublet de" << word[i] << "non autorisé trouvé, suppression de" << words->at(j);
                     words->remove(j);
                     j--;
                 }
             }
-    }
-    return words;
-}
-
-// Final Call
-QVector<QString> *solveWord(const QString word, lang dico, QVector<QChar>* bannedLetters)
-{
-    /*
-    //return doubleSort(word, missingSort(positionSort(word, dico), bannedLetters));
-    //return doubleSort(word, positionSort(word, dico));
-
-    // stores positions where you have a letter
-    QVector<int> knownLetterPosition;
-    for(int i = 0; i < word.size(); i++)
-        if(word.at(i) != '_')
-            knownLetterPosition.append(i);
-
-    //Step 1
-    qDebug() << "Step 1";
-    QVector<QString> dictionary(openDict(word.length(), dico));
-    QVector<QString> *matchingWords = new QVector<QString>();
-    foreach(QString w, dictionary)
-    {
-        int totalMatch = 0;
-        for(int i =0; i < knownLetterPosition.size(); i++)
-        {
-            if(w[knownLetterPosition[i]] == word[knownLetterPosition[i]])
-                totalMatch += 1;
-            else
-                i += knownLetterPosition.size();
-        }
-        if(totalMatch == knownLetterPosition.size())
-            matchingWords->append(w);
-    }
-
-    //Step 2
-    qDebug() << "Step 2";
-    QVector<QString> *secondMatch = new QVector<QString>(*matchingWords);
-
-    for(int i = 0; i < secondMatch->size(); i++)
-    {
-        for(int j = 0; j < secondMatch[i].size(); j++)
-        {
-            for(int k = 0; k < bannedLetters->size(); k++)
-            {
-                if(secondMatch[i][j] == bannedLetters->at(k))
-                {
-                    matchingWords->remove(i);
-                }
-            }
-        }
-    }
-
-    return matchingWords;
     */
+    return words;
 }
