@@ -2,7 +2,7 @@
 #include "error.h"
 
 
-QVector<QString> openDict(int length, lang l)
+QVector<QString> openDict(int length, lang l) // Finished
 {
     QString dictName(QString::number(length) + ".");
     switch (l)
@@ -33,7 +33,7 @@ QVector<QString> openDict(int length, lang l)
 }
 
 // First part: position sort
-QVector<QString> *positionSort(const QString word, QVector<QString> realDict)
+QVector<QString> *positionSort(const QString word, QVector<QString> realDict) // Finished
 {
     // stores positions where you have a letter
     QVector<int> knownLetterPosition;
@@ -60,9 +60,22 @@ QVector<QString> *positionSort(const QString word, QVector<QString> realDict)
 }
 
 // Second part: missing sort
-QVector<QString> *missingSort(QVector<QString> *words, QVector<QChar>* forbidenLetters)
+QVector<QString> *missingSort(QVector<QString> *words, QVector<QChar>* bannedLetters) // Finished
 {
-
+    for(int i = 0; i < words->size(); i++)
+    {
+        qDebug() << "working on" << words->at(i);
+        for(int j = 0; j < bannedLetters->size(); j++)
+        {
+            if(words->at(i).contains(bannedLetters->at(j)))
+            {
+                qDebug() << words->at(i) << "contains" << bannedLetters->at(j) << ": removing form list";
+                words->remove(i);
+                i--;
+            }
+        }
+    }
+    return words;
 }
 
 // Third part: double sort
