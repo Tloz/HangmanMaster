@@ -17,7 +17,7 @@ And for each words, the algorithm gives the possibles words that matches the inp
 ###Algorithm
 Originally, to identify matching words for one word to find, I had to do three things:
 1. Take all words in the dictionary with the same length than the word to find that have matching letters.
-For example, if you have _ _ A _ _, and this dictionary (very small, for example puposes):
+</br>For example, if you have _ _ A _ _, and this dictionary (very small, for example puposes):
 >PLACE
 
 >PLAZA
