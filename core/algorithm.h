@@ -13,13 +13,13 @@ enum lang{FR, EN};
 QVector<QString> openDict(int length, lang l);
 
 //First part: position sort
-QVector<QString> *positionSort(const QString, QVector<QString>);
+QVector<QString> *positionSort(const QString word, QVector<QString> dico);
 
 //Second part: missing sort
-QVector<QString> *missingSort(QVector<QString>*, QVector<QChar>*);
+QVector<QString> *missingSort(QVector<QString>* listOfWord, QVector<QChar>* bannedLetters);
 
 //Third part: double sort
-QVector<QString> *doubleSort(const QString word, QVector<QString>*);
+QVector<QString> *doubleSort(const QString word, QVector<QString>* words);
 
 //Final Call
 QVector<QString> *solveWord(const QString, int, QVector<QChar>*);
