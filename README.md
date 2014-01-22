@@ -17,7 +17,8 @@ And for each words, the algorithm gives the possibles words that matches the inp
 ###Algorithm
 Originally, to identify matching words for one word to find, I had to do three things:
 1. Take all words in the dictionary with the same length than the word to find that have matching letters.
-</br>For example, if you have _ _ A _ _, and this dictionary (very small, for example puposes):
+
+For example, if you have _ _ A _ _, and this dictionary (very small, for example puposes):
 >PLACE
 
 >PLAZA
@@ -29,13 +30,19 @@ Originally, to identify matching words for one word to find, I had to do three t
 >GLACE
 
 You take every words except PIZZA, as the third letter must be a A.
+
 2. Remove all words that contains letter that you know they aren't in the phrase.
 Let's say that you know there are no G and T, you can get rid of TRACE and GLACE.
+
 3. Finally, you remove words having double letters missing in the word to find.
 In PLAZA, there are two A, nevertheless, in your word to find, there is only one. So remove PLAZA
 
 There is no other way to remove words and being sure that they are not the one that we're looking for.
 Or at least, I haven't found it yet ;)
+
+1. go
+2. dsuy
+3. qyt
 
 ###Improvements
 
