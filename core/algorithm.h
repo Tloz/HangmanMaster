@@ -13,7 +13,7 @@ enum lang{FR, EN};
 QVector<QString> openDict(int length, lang l);
 
 //First part: position sort
-QVector<QString> *positionSort(const QString, int);
+QVector<QString> *positionSort(const QString, QVector<QString>);
 
 //Second part: missing sort
 QVector<QString> *missingSort(QVector<QString>*, QVector<QChar>*);
