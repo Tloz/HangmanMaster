@@ -8,27 +8,22 @@ void test()
     QVector<QChar> *miss = new QVector<QChar>();
     miss->append('T');
     miss->append('X');
+    qDebug() << mysteryWord << endl << dictionary << endl << *miss;
     QVector<QString> *output = new QVector<QString>();
 
 
     output = positionSort(mysteryWord, dictionary);
-    qDebug() << "partie 1";
-    for(int i = 0; i < output->size(); i++)
-        qDebug() << output->at(i);
+    qDebug() << "partie 1" << endl << *output << endl;
+
 
     /*
     output = missingSort(output, miss);
-    qDebug() << endl << "partie 2";
-    for(int i = 0; i < output->size(); i++)
-        qDebug() << output->at(i);
-    qDebug() << endl << endl;
+    qDebug() << "partie 2" << endl << *output << endl;
     */
 
     /*
     output = doubleSort(mysteryWord, output);
-    qDebug() << endl << "partie 3";
-    for(int i = 0; i < output->size(); i++)
-        qDebug() << output->at(i);
+    qDebug() << "partie 3" << endl << *output << endl;
     */
     qDebug() << endl << "THE END";
 }
