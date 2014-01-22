@@ -8,7 +8,7 @@ void test()
     QVector<QChar> *miss = new QVector<QChar>();
     miss->append('T');
     miss->append('X');
-    qDebug() << mysteryWord << endl << dictionary << endl << *miss;
+    qDebug() << mysteryWord << endl << dictionary << endl << *miss << endl;
     QVector<QString> *output = new QVector<QString>();
 
 
