@@ -16,5 +16,5 @@ And for each words, the algorithm gives the possibles words that matches the inp
 
 #Improvements
 
-*For the moment, the algorithm does 2 passes on each word to find. Hack to make it 1__
-*The part that checks if there is no unwanted double works only on a word. Make it work on the whole sentence__
+*For the moment, the algorithm does 2 passes on each word to find. Hack to make it 1
+*The part that checks if there is no unwanted double works only on a word. Make it work on the whole sentence
