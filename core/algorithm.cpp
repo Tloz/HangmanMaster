@@ -5,7 +5,6 @@
 QVector<QString> openDict(int length, lang l)
 {
     QString dictName(QString::number(length) + ".");
-
     switch (l)
     {
     case EN:
@@ -13,6 +12,7 @@ QVector<QString> openDict(int length, lang l)
         break;
     case FR:
         dictName.append("fr");
+        break;
     default:
         dictName.append("fr");
         break;
