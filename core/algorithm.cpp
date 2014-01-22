@@ -24,16 +24,13 @@ QVector<QString> openDict(int length, lang l)
 }
 
 // First part: position sort
-QVector<QString> *positionSort(const QString word, int dico)
+QVector<QString> *positionSort(const QString word, QVector<QString> realDict)
 {
     // stores positions where you have a letter
     QVector<int> knownLetterPosition;
     for(int i = 0; i < word.size(); i++)
         if(word.at(i) != '_')
             knownLetterPosition.append(i);
-
-    // open dictionary
-    QVector<QString> realDict = openDict(word.size(), FR);
 
     // take words with matching letters
     QVector<QString> *matchingWords = new QVector<QString>();
